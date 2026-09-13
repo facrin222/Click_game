@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #222;
+}
+
+#clickButton {
+    width: 150px;
+    height: 150px;
+
+    border: none;
+    border-radius: 50%;
+
+    background-color: #4caf50;
+    color: white;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
