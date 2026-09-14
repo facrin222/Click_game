@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    background-color: #222;
+}
+
+#clickDisplay {
+    width: 300px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    border-radius: 15px;
+
+    background-color: #444;
+}
+
+#clickLabel,
+#clickCount {
+    font-size: 15px;
+    font-weight: bold;
+
+    color: white;
+}
+
+#clickButton {
+    width: 150px;
+    height: 150px;
+
+    border: none;
+    border-radius: 50%;
+
+    background-color: #4caf50;
+    color: white;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
