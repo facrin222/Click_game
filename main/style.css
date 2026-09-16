@@ -13,7 +13,8 @@ body {
     background-color: #222;
 }
 
-#clickDisplay {
+#clickDisplay,
+#clickPerSecDisplay {
     width: 300px;
     height: 60px;
 
@@ -29,26 +30,22 @@ body {
     background-color: #444;
 }
 
+#clickPerSecDisplay {
+    margin-top: -10px;
+}
+
 #clickLabel,
-#clickCount {
+#clickCount,
+#clickPerSecLabel {
     font-size: 15px;
     font-weight: bold;
 
     color: white;
 }
 
-#clickButton {
-    width: 150px;
-    height: 150px;
-
-    border: none;
-    border-radius: 50%;
-
-    background-color: #4caf50;
-    color: white;
-
-    font-size: 24px;
+#clickPerSec {
+    font-size: 18px;
     font-weight: bold;
 
-    cursor: pointer;
+    color: white;
 }
