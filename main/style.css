@@ -36,7 +36,8 @@ body {
 
 #clickLabel,
 #clickCount,
-#clickPerSecLabel {
+#clickPerSecLabel,
+#clickPerSec {
     font-size: 15px;
     font-weight: bold;
 
@@ -45,7 +46,20 @@ body {
 
 #clickPerSec {
     font-size: 18px;
+}
+
+#clickButton {
+    width: 150px;
+    height: 150px;
+
+    border: none;
+    border-radius: 50%;
+
+    background-color: #4caf50;
+    color: white;
+
+    font-size: 24px;
     font-weight: bold;
 
-    color: white;
+    cursor: pointer;
 }
