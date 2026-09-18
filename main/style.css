@@ -1,15 +1,12 @@
 body {
     margin: 0;
-
     width: 100vw;
     height: 100vh;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 30px;
-
     background-color: #222;
 }
 
@@ -17,16 +14,12 @@ body {
 #clickPerSecDisplay {
     width: 300px;
     height: 60px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 0 20px;
     box-sizing: border-box;
-
     border-radius: 15px;
-
     background-color: #444;
 }
 
@@ -40,7 +33,6 @@ body {
 #clickPerSec {
     font-size: 15px;
     font-weight: bold;
-
     color: white;
 }
 
@@ -51,15 +43,151 @@ body {
 #clickButton {
     width: 150px;
     height: 150px;
-
     border: none;
     border-radius: 50%;
-
     background-color: #4caf50;
     color: white;
-
     font-size: 24px;
     font-weight: bold;
+    cursor: pointer;
+}
+
+/* ===== Side Panel Module ===== */
+
+.side-panel {
+    display: none;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 12vw;
+    min-width: 150px;
+    max-width: 230px;
+    height: 100vh;
+
+    box-sizing: border-box;
+
+    border-right: 5px solid #C9C9C9;
+
+    background-color: #222;
+
+    z-index: 100;
+}
+
+
+/* ===== Tab List ===== */
+
+.side-tab-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 0;
+}
+
+
+/* ===== Individual Tab ===== */
+
+.side-tab {
+    position: relative;
+
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 6px;
+
+    box-sizing: border-box;
+
+    border: none;
+    border-bottom: 2px solid #FFFFFF;
+
+    background-color: #444;
+    color: white;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    text-align: left;
+}
+
+.side-tab:last-child {
+    border-bottom: none;
+}
+
+.side-tab.active {
+    background-color: #555;
+}
+
+
+/* ===== Current Tab Indicator ===== */
+
+.tab-current {
+    margin-left: 3px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    color: white;
+}
+
+
+/* ===== Tab Content ===== */
+
+.side-tab-content {
+    display: none;
+
+    width: 100%;
+    height: calc(100vh - 180px);
+
+    box-sizing: border-box;
+}
+
+.side-tab-content.active {
+    display: block;
+}
+
+
+/* ===== Options ===== */
+
+#optionTab {
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+}
+
+#optionTab.active {
+    display: flex;
+}
+
+.option-buttons {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+.option-button {
+    width: 40px;
+    height: 20px;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    border: 2px solid #FFA473;
+    border-radius: 8px;
+
+    background-color: transparent;
 
     cursor: pointer;
 }

@@ -24,5 +24,42 @@
         <span id="clickPerSecLabel">CPS</span>
         <span id="clickPerSec">0</span>
     </div>
+
+    <!-- ===== Side Panel Module ===== -->
+<aside id="sidePanel" class="side-panel">
+
+    <!-- Tab Buttons -->
+    <nav class="side-tab-list">
+        <button class="side-tab active" data-tab="clickTab">
+            <span>Click</span>
+            <span class="tab-current">C</span>
+        </button>
+
+        <button class="side-tab" data-tab="upgradeTab">
+            <span>Click Upgrades</span>
+            <span class="tab-current"></span>
+        </button>
+
+        <button class="side-tab" data-tab="optionTab">
+            <span>Options</span>
+            <span class="tab-current"></span>
+        </button>
+    </nav>
+
+    <!-- Tab Contents -->
+    <section id="clickTab" class="side-tab-content active">
+    </section>
+
+    <section id="upgradeTab" class="side-tab-content">
+    </section>
+
+    <section id="optionTab" class="side-tab-content">
+        <div class="option-buttons">
+            <button class="option-button"></button>
+            <button class="option-button"></button>
+        </div>
+    </section>
+
+</aside>
 </body>
 </html>
