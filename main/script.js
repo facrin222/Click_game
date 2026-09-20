@@ -141,7 +141,7 @@ function showMessage(text) {
 }
 
 
-// ===== Options: Export / Import / Save =====
+// ===== Options: Export / Import =====
 
 // 클립보드에 복사 (실패하면 false)
 async function copyToClipboard(text) {
@@ -159,7 +159,7 @@ async function copyToClipboard(text) {
     }
 }
 
-// EXP: 현재 데이터를 JSON 문자열로 입력창에 표시하고 복사
+// EXPORT: 현재 데이터를 JSON 문자열로 입력창에 표시하고 복사
 exportButton.addEventListener("click", async () => {
     const json = JSON.stringify(getSaveData());
 
@@ -169,7 +169,7 @@ exportButton.addEventListener("click", async () => {
     showMessage(copied ? "Exported & copied" : "Exported (copy manually)");
 });
 
-// IMP: 입력창의 JSON 문자열을 읽어 적용
+// IMPORT: 입력창의 JSON 문자열을 읽어 적용
 importButton.addEventListener("click", () => {
     let data;
 
@@ -189,9 +189,23 @@ importButton.addEventListener("click", () => {
     showMessage("Imported");
 });
 
-// SAVE: 즉시 저장
+
+
+// ===== Save Button =====
+// 사이드 패널 옆의 독립 SAVE 버튼: 즉시 저장 + 자동 저장 주기 갱신
+// 저장되면 버튼이 잠깐 강조되어 어느 탭에서든 저장됐음을 알 수 있음
+
+let saveFlashTimer = null;
+
 saveButton.addEventListener("click", () => {
     saveNow();
+
+    saveButton.classList.add("saved");
+    clearTimeout(saveFlashTimer);
+    saveFlashTimer = setTimeout(() => {
+        saveButton.classList.remove("saved");
+    }, 500);
+
     showMessage("Saved");
 });
 
