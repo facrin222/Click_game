@@ -1,14 +1,78 @@
+/* ===== Global Variables =====
+   자주 쓰는 값을 한 곳에서 관리 (수정할 때 여기만 바꾸면 됨) */
+
+:root {
+    /* 사이드 패널 너비 (화면 크기에 따라 150px ~ 230px) */
+    --side-panel-width: clamp(150px, 12vw, 230px);
+
+    /* 메인 탭 화면의 왼쪽 시작 위치
+       기본값 0 = 사이드 패널이 없을 때 전체 화면 중앙 정렬 */
+    --content-left: 0px;
+}
+
+/* 사이드 패널이 열리면(body.panel-open) 메인 화면이 패널 오른쪽 영역으로 이동 */
+body.panel-open {
+    --content-left: var(--side-panel-width);
+}
+
+
+/* ===== Base Layout ===== */
+
 body {
     margin: 0;
     width: 100vw;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
+    overflow: hidden;
     background-color: #222;
 }
+
+
+/* ===== Main Tab Content Module =====
+   모든 메인 탭 공통 규칙.
+   - 기본은 숨김, .active가 붙은 탭만 표시
+   - 표시될 때 내부 요소를 세로 방향으로 화면 정중앙에 정렬 */
+
+.main-tab-content {
+    display: none;
+
+    position: fixed;
+    top: 0;
+    left: var(--content-left);
+
+    width: calc(100vw - var(--content-left));
+    height: 100vh;
+
+    box-sizing: border-box;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+
+    z-index: 50;
+}
+
+.main-tab-content.active {
+    display: flex;
+}
+
+
+/* ===== Click Tab: 클릭 버튼 ===== */
+
+#clickButton {
+    width: 150px;
+    height: 150px;
+    border: none;
+    border-radius: 50%;
+    background-color: #4caf50;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* ===== Click Tab: Total Click / CPS 표시 박스 ===== */
 
 #clickDisplay,
 #clickPerSecDisplay {
@@ -23,6 +87,7 @@ body {
     background-color: #444;
 }
 
+/* CPS 박스는 Total Click 박스에 조금 더 가깝게 붙임 */
 #clickPerSecDisplay {
     margin-top: -10px;
 }
@@ -40,23 +105,11 @@ body {
     font-size: 18px;
 }
 
-#clickButton {
-    width: 150px;
-    height: 150px;
-    border: none;
-    border-radius: 50%;
-    background-color: #4caf50;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-}
 
-/* ===== Side Panel Module ===== */
+/* ===== Side Panel Module =====
+   기본은 숨김, body.panel-open이 붙으면 표시 */
 
 .side-panel {
-    --side-panel-width: clamp(150px, 12vw, 230px);
-
     display: none;
 
     position: fixed;
@@ -67,28 +120,28 @@ body {
     height: 100vh;
 
     box-sizing: border-box;
-
     border-right: 5px solid #C9C9C9;
-
     background-color: #222;
 
     z-index: 100;
 }
 
+body.panel-open .side-panel {
+    display: block;
+}
 
-/* ===== Tab List ===== */
+
+/* ===== Side Tab List ===== */
 
 .side-tab-list {
     display: flex;
     flex-direction: column;
-
     gap: 0;
-
     width: 100%;
 }
 
 
-/* ===== Individual Tab ===== */
+/* ===== Individual Side Tab ===== */
 
 .side-tab {
     width: 100%;
@@ -99,7 +152,6 @@ body {
     justify-content: space-between;
 
     padding: 0 10px;
-
     box-sizing: border-box;
 
     border: none;
@@ -112,7 +164,6 @@ body {
     font-weight: bold;
 
     cursor: pointer;
-
     text-align: left;
 }
 
@@ -120,63 +171,29 @@ body {
     border-bottom: none;
 }
 
+/* 현재 선택된 탭 */
 .side-tab.active {
     background-color: #555;
 }
 
 
-/* ===== Current Tab Indicator ===== */
+/* ===== Current Tab Indicator (현재 탭 표시 "C") ===== */
 
 .tab-current {
     margin-left: 5px;
-
     font-size: 12px;
     font-weight: bold;
-
     color: white;
 }
 
 
-/* ===== Main Tab Content Module ===== */
-
-.main-tab-content {
-    display: none;
-
-    position: fixed;
-
-    left: clamp(150px, 12vw, 230px);
-    top: 0;
-
-    width: calc(100vw - clamp(150px, 12vw, 230px));
-    height: 100vh;
-
-    box-sizing: border-box;
-
-    z-index: 50;
-}
-
-
-/* ===== Options ===== */
-
-#optionMain {
-    align-items: center;
-    justify-content: center;
-}
-
-#optionMain.active {
-    display: flex;
-}
-
-
-/* ===== Option Buttons ===== */
+/* ===== Options Tab: 옵션 버튼 ===== */
 
 .option-buttons {
     display: flex;
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
-
     gap: 10px;
 }
 
@@ -185,13 +202,11 @@ body {
     height: 20px;
 
     padding: 0;
-
     box-sizing: border-box;
 
     border: 2px solid #FFA473;
     border-radius: 8px;
 
     background-color: transparent;
-
     cursor: pointer;
 }
