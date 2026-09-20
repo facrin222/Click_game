@@ -2,21 +2,18 @@
    자주 쓰는 값을 한 곳에서 관리 (수정할 때 여기만 바꾸면 됨) */
 
 :root {
-    /* 사이드 패널 너비 (화면 크기에 따라 150px ~ 230px) */
+    /* 왼쪽 탭 영역의 너비 (화면 크기에 따라 150px ~ 230px) */
     --side-panel-width: clamp(150px, 12vw, 230px);
 
-    /* 메인 탭 화면의 왼쪽 시작 위치
-       기본값 0 = 사이드 패널이 없을 때 전체 화면 중앙 정렬 */
-    --content-left: 0px;
-}
-
-/* 사이드 패널이 열리면(body.panel-open) 메인 화면이 패널 오른쪽 영역으로 이동 */
-body.panel-open {
-    --content-left: var(--side-panel-width);
+    /* 영역이 열리는 속도 */
+    --panel-speed: 0.35s;
 }
 
 
-/* ===== Base Layout ===== */
+/* ===== Base Layout =====
+   화면 전체를 [왼쪽 탭 영역 | 메인 영역] 2열로 나눔.
+   기본(닫힘)은 왼쪽 열 너비가 0이라 메인이 화면 전체를 사용하고,
+   body.panel-open이 붙으면 왼쪽 열이 열리면서 세로줄이 그어진 것처럼 보임. */
 
 body {
     margin: 0;
@@ -24,32 +21,115 @@ body {
     height: 100vh;
     overflow: hidden;
     background-color: #222;
+
+    display: grid;
+    grid-template-columns: 0px 1fr;           /* 닫힘 */
+    transition: grid-template-columns var(--panel-speed) ease;
+}
+
+body.panel-open {
+    grid-template-columns: var(--side-panel-width) 1fr;   /* 열림 */
+}
+
+
+/* ===== Side Panel Module =====
+   메인 화면 왼쪽에 붙어 있는 탭 영역.
+   별도 배경 없이 오른쪽 세로줄(border)만 있어서
+   하나의 화면이 둘로 나뉜 것처럼 보임. */
+
+.side-panel {
+    grid-column: 1;
+    grid-row: 1;
+
+    min-width: 0;              /* 열 너비가 0일 때 내용이 밀고 나오지 않게 */
+    height: 100%;
+    overflow: hidden;
+    visibility: hidden;        /* 닫혀 있을 때 클릭/키보드 접근 차단 */
+
+    box-sizing: border-box;
+}
+
+body.panel-open .side-panel {
+    visibility: visible;
+    border-right: 5px solid #C9C9C9;   /* 영역을 나누는 세로줄 */
+}
+
+
+/* ===== Side Tab List ===== */
+
+.side-tab-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+}
+
+
+/* ===== Individual Side Tab ===== */
+
+.side-tab {
+    width: 100%;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 10px;
+    box-sizing: border-box;
+
+    border: none;
+    border-bottom: 2px solid #FFFFFF;
+
+    background-color: #444;
+    color: white;
+
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;       /* 좁아지는 동안 글자가 줄바꿈되지 않게 */
+
+    cursor: pointer;
+    text-align: left;
+}
+
+.side-tab:last-child {
+    border-bottom: none;
+}
+
+/* 현재 선택된 탭 */
+.side-tab.active {
+    background-color: #555;
+}
+
+
+/* ===== Current Tab Indicator (현재 탭 표시 "C") ===== */
+
+.tab-current {
+    margin-left: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
 }
 
 
 /* ===== Main Tab Content Module =====
    모든 메인 탭 공통 규칙.
    - 기본은 숨김, .active가 붙은 탭만 표시
-   - 표시될 때 내부 요소를 세로 방향으로 화면 정중앙에 정렬 */
+   - 오른쪽 열(남은 공간) 안에서 내부 요소를 정중앙에 정렬 */
 
 .main-tab-content {
     display: none;
 
-    position: fixed;
-    top: 0;
-    left: var(--content-left);
+    grid-column: 2;
+    grid-row: 1;
 
-    width: calc(100vw - var(--content-left));
-    height: 100vh;
-
+    min-width: 0;
     box-sizing: border-box;
 
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 30px;
-
-    z-index: 50;
 }
 
 .main-tab-content.active {
@@ -106,87 +186,6 @@ body {
 }
 
 
-/* ===== Side Panel Module =====
-   기본은 숨김, body.panel-open이 붙으면 표시 */
-
-.side-panel {
-    display: none;
-
-    position: fixed;
-    left: 0;
-    top: 0;
-
-    width: var(--side-panel-width);
-    height: 100vh;
-
-    box-sizing: border-box;
-    border-right: 5px solid #C9C9C9;
-    background-color: #222;
-
-    z-index: 100;
-}
-
-body.panel-open .side-panel {
-    display: block;
-}
-
-
-/* ===== Side Tab List ===== */
-
-.side-tab-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    width: 100%;
-}
-
-
-/* ===== Individual Side Tab ===== */
-
-.side-tab {
-    width: 100%;
-    height: 60px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 10px;
-    box-sizing: border-box;
-
-    border: none;
-    border-bottom: 2px solid #FFFFFF;
-
-    background-color: #444;
-    color: white;
-
-    font-size: 12px;
-    font-weight: bold;
-
-    cursor: pointer;
-    text-align: left;
-}
-
-.side-tab:last-child {
-    border-bottom: none;
-}
-
-/* 현재 선택된 탭 */
-.side-tab.active {
-    background-color: #555;
-}
-
-
-/* ===== Current Tab Indicator (현재 탭 표시 "C") ===== */
-
-.tab-current {
-    margin-left: 5px;
-    font-size: 12px;
-    font-weight: bold;
-    color: white;
-}
-
-
 /* ===== Options Tab: 옵션 버튼 ===== */
 
 .option-buttons {
@@ -209,4 +208,46 @@ body.panel-open .side-panel {
 
     background-color: transparent;
     cursor: pointer;
+
+    /* 버튼 안 글자 (작은 버튼 크기에 맞춤) */
+    color: #FFA473;
+    font-size: 9px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* 마우스를 올렸을 때 살짝 강조 */
+.option-button:hover {
+    background-color: rgba(255, 164, 115, 0.15);
+}
+
+
+/* ===== Options Tab: JSON 입력창 (Export 결과 / Import 입력) ===== */
+
+.option-textarea {
+    width: 260px;
+    height: 80px;
+
+    margin-top: 10px;
+    padding: 8px;
+    box-sizing: border-box;
+
+    border: 2px solid #666;
+    border-radius: 8px;
+
+    background-color: #333;
+    color: white;
+
+    font-size: 12px;
+    resize: none;
+}
+
+
+/* ===== Options Tab: 결과 메시지 =====
+   높이를 고정해서 메시지가 나타나도 버튼 위치가 흔들리지 않게 함 */
+
+.option-message {
+    height: 16px;
+    font-size: 12px;
+    color: #FFA473;
 }
