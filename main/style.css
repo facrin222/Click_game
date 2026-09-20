@@ -156,7 +156,7 @@ body.panel-open .side-panel {
 
 #clickDisplay,
 #clickPerSecDisplay {
-    width: 300px;
+    width: 200px;
     height: 60px;
     display: flex;
     align-items: center;
