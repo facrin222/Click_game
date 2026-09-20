@@ -70,8 +70,23 @@
 <section id="optionMain" class="main-tab-content">
 
     <div class="option-buttons">
-        <button class="option-button"></button>
-        <button class="option-button"></button>
+
+        <!-- EXP: 현재 데이터를 JSON 문자열로 내보내기 (아래 입력창에 표시 + 클립보드 복사) -->
+        <button id="exportButton" class="option-button" title="Export data as JSON">EXP</button>
+
+        <!-- IMP: 아래 입력창의 JSON 문자열을 불러와서 적용 -->
+        <button id="importButton" class="option-button" title="Import data from JSON">IMP</button>
+
+        <!-- SAVE: 즉시 저장 (자동 저장 타이머도 새로 시작) -->
+        <button id="saveButton" class="option-button" title="Save now">SAVE</button>
+
+        <!-- Export 결과 표시 / Import 할 문자열 붙여넣기 -->
+        <textarea id="dataTextarea" class="option-textarea" spellcheck="false"
+                  placeholder="Paste JSON here, then press IMP"></textarea>
+
+        <!-- 동작 결과 메시지 (Saved, Imported 등) -->
+        <div id="optionMessage" class="option-message"></div>
+
     </div>
 
 </section>
