@@ -55,6 +55,54 @@ body.panel-open .side-panel {
 }
 
 
+/* ===== Save Button Module =====
+   탭과 무관한 독립 버튼.
+   - 사이드 패널 구분선 오른쪽 위 구석에 고정 (구분선/화면 위쪽에서 각각 5px 간격)
+   - 사이드 패널이 열릴 때(body.panel-open)만 표시
+   - z-index를 가장 높게 해서 어떤 탭 위에서도 항상 맨 위에 보임 */
+
+.save-button {
+    display: none;
+
+    position: fixed;
+    top: 5px;
+    left: calc(var(--side-panel-width) + 5px);
+
+    width: 80px;
+    height: 60px;
+
+    padding: 0;
+    box-sizing: border-box;
+
+    border: 2px solid #FFA473;
+    border-radius: 8px;
+
+    background-color: #222;
+    color: #FFA473;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    z-index: 200;
+}
+
+body.panel-open .save-button {
+    display: block;
+}
+
+.save-button:hover {
+    background-color: #3a2f29;
+}
+
+/* 저장 직후 잠깐 강조 (JS에서 .saved 클래스를 붙였다 뗌) */
+.save-button.saved {
+    background-color: #FFA473;
+    color: #222;
+}
+
+
 /* ===== Side Tab List ===== */
 
 .side-tab-list {
@@ -156,7 +204,7 @@ body.panel-open .side-panel {
 
 #clickDisplay,
 #clickPerSecDisplay {
-    width: 200px;
+    width: 300px;
     height: 60px;
     display: flex;
     align-items: center;
@@ -197,7 +245,7 @@ body.panel-open .side-panel {
 }
 
 .option-button {
-    width: 300px;
+    width: 200px;
     height: 60px;
 
     padding: 0;
