@@ -211,7 +211,7 @@ body.panel-open .side-panel {
 
     /* 버튼 안 글자 (작은 버튼 크기에 맞춤) */
     color: #FFA473;
-    font-size: 9px;
+    font-size: 20px;
     font-weight: bold;
     white-space: nowrap;
 }
