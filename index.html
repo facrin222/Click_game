@@ -10,26 +10,12 @@
     <script src="main/script.js" defer></script>
 </head>
 <body>
-    <!-- basic button -->
-    <button id="clickButton">Click!</button>
 
-    <!-- TC display -->
-    <div id="clickDisplay">
-        <span id="clickLabel">Total Click</span>
-        <span id="clickCount">0</span>
-    </div>
-
-    <!-- CPS display -->
-    <div id="clickPerSecDisplay">
-        <span id="clickPerSecLabel">CPS</span>
-        <span id="clickPerSec">0</span>
-    </div>
-
-<!-- ===== Side Panel Module ===== -->
-
+<!-- ===== Side Panel Module =====
+     Total Click이 10 이상이 되면 나타나는 왼쪽 탭 메뉴.
+     data-tab 값은 아래 메인 탭 섹션의 id와 반드시 일치해야 함. -->
 <aside id="sidePanel" class="side-panel">
 
-    <!-- Tab Buttons -->
     <nav class="side-tab-list">
 
         <button class="side-tab active" data-tab="clickMain">
@@ -52,22 +38,43 @@
 </aside>
 
 
-<!-- ===== Main Tab Content Module ===== -->
+<!-- ===== Main Tab Content Module =====
+     각 섹션이 하나의 탭 화면.
+     .active 클래스가 붙은 섹션만 표시되고, 내용물은 화면 중앙에 정렬됨. -->
 
-<section id="upgradeMain" class="main-tab-content">
-    <!-- Click Upgrades 내용은 나중에 추가 -->
-</section>
+<!-- [Click 탭] 기본 클릭 버튼 + Total Click / CPS 표시 -->
+<section id="clickMain" class="main-tab-content active">
 
+    <!-- 클릭 버튼 -->
+    <button id="clickButton">Click!</button>
 
-<section id="optionMain" class="main-tab-content">
+    <!-- Total Click 표시 -->
+    <div id="clickDisplay">
+        <span id="clickLabel">Total Click</span>
+        <span id="clickCount">0</span>
+    </div>
 
-    <div class="option-buttons">
-
-        <button class="option-button"></button>
-        <button class="option-button"></button>
-
+    <!-- CPS(초당 클릭 수) 표시 -->
+    <div id="clickPerSecDisplay">
+        <span id="clickPerSecLabel">CPS</span>
+        <span id="clickPerSec">0</span>
     </div>
 
 </section>
+
+<!-- [Click Upgrades 탭] 내용은 나중에 추가 -->
+<section id="upgradeMain" class="main-tab-content">
+</section>
+
+<!-- [Options 탭] 옵션 버튼 모음 -->
+<section id="optionMain" class="main-tab-content">
+
+    <div class="option-buttons">
+        <button class="option-button"></button>
+        <button class="option-button"></button>
+    </div>
+
+</section>
+
 </body>
 </html>
